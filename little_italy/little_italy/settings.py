@@ -14,7 +14,7 @@ from pathlib import Path
 import os
 
 EDAMAM_APP_ID = os.getenv('EDAMAM_APP_ID', '')
-PIZZA_KEY = os.getenv('PIZZA_KEY', '')
+EDAMAM_APP_KEY = os.getenv('EDAMAM_APP_KEY', '')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
