@@ -10,3 +10,6 @@ def recipe_search(request):
     recipes = get_recipes(query) if query else None  # Consulta la API si hay un término
 
     return render(request, 'menu/recipes.html', {'recipes': recipes, 'query': query})
+
+def home(request):
+    return render(request, 'menu/home.html')

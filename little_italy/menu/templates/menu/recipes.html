@@ -1,32 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buscar Recetas</title>
-</head>
-<body>
-    <h1>Buscar Recetas</h1>
-    <form method="get" action="{% url 'recipe_search' %}">
-        <input type="text" name="query" placeholder="Buscar recetas..." value="{{ query }}">
-        <button type="submit">Buscar</button>
-    </form>
+<h1>Buscar Recetas</h1>
+<form method="get" action="{% url 'recipe_search' %}">
+    <input type="text" name="query" placeholder="Buscar recetas..." value="{{ query }}">
+    <button type="submit">Buscar</button>
+</form>
 
-    {% if recipes %}
-        {% if recipes.hits %}
-            <h2>Resultados para "{{ query }}":</h2>
-            <ul>
-                {% for hit in recipes.hits %}
-                    <li>
-                        <h3>{{ hit.recipe.label }}</h3>
-                        <img src="{{ hit.recipe.image }}" alt="{{ hit.recipe.label }}">
-                        <p><a href="{{ hit.recipe.url }}" target="_blank">Ver receta completa</a></p>
-                    </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>No se encontraron recetas para "{{ query }}".</p>
-        {% endif %}
+{% if error %}
+    <p style="color: red;">{{ error }}</p>
+{% endif %}
+
+{% if recipes %}
+    {% if recipes.hits %}
+        <h2>Resultados para "{{ query }}":</h2>
+        <ul>
+            {% for hit in recipes.hits %}
+                <li>
+                    <h3>{{ hit.recipe.label }}</h3>
+                    <img src="{{ hit.recipe.image }}" alt="{{ hit.recipe.label }}" width="150">
+                    <p><a href="{{ hit.recipe.url }}" target="_blank">Ver receta completa</a></p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No se encontraron recetas para "{{ query }}".</p>
     {% endif %}
-</body>
-</html>
+{% else %}
+    <p>Introduce un término de búsqueda para obtener recetas.</p>
+{% endif %}
+
